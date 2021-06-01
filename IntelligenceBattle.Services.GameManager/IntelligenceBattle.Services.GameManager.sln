@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligenceBattle.Services.GameManager", "IntelligenceBattle.Services.GameManager\IntelligenceBattle.Services.GameManager.csproj", "{4C2E58F0-E4FC-43E2-829A-81D9BE0A6E09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C2E58F0-E4FC-43E2-829A-81D9BE0A6E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2E58F0-E4FC-43E2-829A-81D9BE0A6E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2E58F0-E4FC-43E2-829A-81D9BE0A6E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2E58F0-E4FC-43E2-829A-81D9BE0A6E09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05AA5C04-60EB-41A1-885A-073777C4DA5C}
+	EndGlobalSection
+EndGlobal
