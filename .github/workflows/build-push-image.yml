@@ -1,8 +1,5 @@
 name: Build-Push Image
 
-env:
-  dockerRepositoryName: 'botoid/intelligence-battle-service'
-
 on:
   push:
   workflow_dispatch:
@@ -19,7 +16,7 @@ jobs:
       run: |
         docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build the Docker image
-      run: cd IntelligenceBattle.Services.GameManager && docker build . --tag ${{env.dockerRepositoryName}}:dev
+      run: cd IntelligenceBattle.Services.GameManager && docker build . --tag ${{secrets.DOCKER_USER}}/intelligence-battle-service:dev
       
     - name: Docker Push
-      run: cd IntelligenceBattle.Services.GameManager && docker push ${{env.dockerRepositoryName}}:dev
+      run: cd IntelligenceBattle.Services.GameManager && docker push ${{secrets.DOCKER_USER}}/intelligence-battle-service:dev
