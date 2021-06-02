@@ -1,7 +1,7 @@
 name: Build-Push Image
 
 env:
-  dockerRepositoryName: 'forevka/intelligence-battle-service'
+  dockerRepositoryName: 'botoid/intelligence-battle-service'
 
 on:
   push:
