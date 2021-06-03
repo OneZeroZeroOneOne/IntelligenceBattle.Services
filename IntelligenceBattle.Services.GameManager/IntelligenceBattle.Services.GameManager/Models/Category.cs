@@ -9,14 +9,16 @@ namespace IntelligenceBattle.Services.GameManager.Models
     {
         public Category()
         {
+            CategoryTranslations = new HashSet<CategoryTranslation>();
             Games = new HashSet<Game>();
             Questions = new HashSet<Question>();
             SearchGames = new HashSet<SearchGame>();
         }
 
         public int Id { get; set; }
-        public string Tittle { get; set; }
+        public string Title { get; set; }
 
+        public virtual ICollection<CategoryTranslation> CategoryTranslations { get; set; }
         public virtual ICollection<Game> Games { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<SearchGame> SearchGames { get; set; }

@@ -19,7 +19,7 @@ namespace IntelligenceBattle.Services.GameManager.Models
         public int Id { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
-        public DateTime? CreatedDatetime { get; set; }
+        public DateTime CreatedDatetime { get; set; }
 
         public virtual ICollection<GameUser> GameUsers { get; set; }
         public virtual ICollection<SearchGame> SearchGames { get; set; }

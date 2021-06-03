@@ -1,29 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IntelligenceBattle.Services.GameManager.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace IntelligenceBattle.Services.GameManager.Context
+#nullable disable
+
+namespace IntelligenceBattle.Services.GameManager.Models
 {
-    public partial class PublicContext : DbContext
+    public partial class intelligencebattleContext : DbContext
     {
-
-        public string connString;
-        public PublicContext()
+        public intelligencebattleContext()
         {
         }
 
-        public PublicContext(DbContextOptions<PublicContext> options)
+        public intelligencebattleContext(DbContextOptions<intelligencebattleContext> options)
             : base(options)
         {
-        }
-
-        public PublicContext(string cString)
-        {
-            connString = cString;
         }
 
         public virtual DbSet<Answer> Answers { get; set; }
@@ -51,7 +42,8 @@ namespace IntelligenceBattle.Services.GameManager.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(connString);
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseNpgsql("Host=185.87.48.116;Port=5434;Database=intelligencebattle;Username=postgres;Password=123123AAA");
             }
         }
 
