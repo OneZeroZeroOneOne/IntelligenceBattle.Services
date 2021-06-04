@@ -20,7 +20,8 @@ namespace IntelligenceBattle.Services.GameManager
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddTransient(x => new PublicContext(Environment.GetEnvironmentVariable("databaseconnectionstring")));
+                    //services.AddTransient(x => new PublicContext(Environment.GetEnvironmentVariable("databaseconnectionstring")));
+                    services.AddTransient(x => new PublicContext("Host=185.87.48.116;Port=5434;Database=intelligencebattle;Username=postgres;Password=123123AAA"));
                     services.AddTransient<GameManagerService>();
                     services.AddHostedService<Worker>();
                 });
