@@ -10,7 +10,7 @@ namespace IntelligenceBattle.Services.GameManager.Models
         public int UserId { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public int? RealId { get; set; }
+        public int RealId { get; set; }
         public int AuthorizationCenterId { get; set; }
 
         public virtual AuthorizationCenter AuthorizationCenter { get; set; }
