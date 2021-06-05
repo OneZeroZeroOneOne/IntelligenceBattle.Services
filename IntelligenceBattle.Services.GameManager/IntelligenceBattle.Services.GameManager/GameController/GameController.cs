@@ -38,8 +38,6 @@ namespace IntelligenceBattle.Services.GameManager.GameController
             };
             var questionsCount = questionsCountQuery.Count();
             var questions = questionsQuery
-            //var questionsCount = _context.Questions.Where(x => x.CategoryId == _game.CategoryId).Count();
-            //var questions = _context.Questions.Where(x => x.CategoryId == _game.CategoryId)
                 .OrderBy(x => x.Id)
                 .Skip(random.Next(1, questionsCount - gameQuestionCount))
                 .Take(gameQuestionCount)
@@ -55,9 +53,8 @@ namespace IntelligenceBattle.Services.GameManager.GameController
             }
             _context.GameQuestions.AddRange(gameQuestionList);
             _context.SaveChanges();
-            //podrugomu
-            var userCount = _context.GameUsers.Count(x => x.GameId == _game.Id);
             var gameUsers = _context.GameUsers.Where(x => x.GameId == _game.Id).ToList();
+            var userCount = gameUsers.Count;
             var startList = new List<Notification>();
             foreach (var user in gameUsers)
             {
@@ -129,14 +126,15 @@ namespace IntelligenceBattle.Services.GameManager.GameController
             {
                 endGameNotList.Add(new Notification
                 {
-                    Text = " ",
+                    Text = $"{_game.Id}",
                     TypeId = 3,
                     UserId = user.UserId,
                     ProviderId = user.ProviderId,
                 });
             }
 
-            _game.IsEnd = true;
+            var game = _context.Games.FirstOrDefault(x => x.Id == _game.Id);
+            game.IsEnd = true;
             _context.Notifications.AddRange(endGameNotList);
             _context.SaveChanges();
         }
