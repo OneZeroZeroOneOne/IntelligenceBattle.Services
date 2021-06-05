@@ -29,8 +29,17 @@ namespace IntelligenceBattle.Services.GameManager.GameController
             int gameQuestionCount = 3;
 
             var random = new Random();
-            var questionsCount = _context.Questions.Count();
-            var questions = _context.Questions.Where(x => x.CategoryId == _game.CategoryId)
+            var questionsCountQuery = _context.Questions.AsQueryable();
+            var questionsQuery = _context.Questions.AsQueryable();
+            if (_game.CategoryId != 1)
+            {
+                questionsCountQuery = questionsCountQuery.Where(x => x.CategoryId == _game.CategoryId);
+                questionsQuery = questionsQuery.Where(x => x.CategoryId == _game.CategoryId);
+            };
+            var questionsCount = questionsCountQuery.Count();
+            var questions = questionsQuery
+            //var questionsCount = _context.Questions.Where(x => x.CategoryId == _game.CategoryId).Count();
+            //var questions = _context.Questions.Where(x => x.CategoryId == _game.CategoryId)
                 .OrderBy(x => x.Id)
                 .Skip(random.Next(1, questionsCount - gameQuestionCount))
                 .Take(gameQuestionCount)
@@ -46,8 +55,22 @@ namespace IntelligenceBattle.Services.GameManager.GameController
             }
             _context.GameQuestions.AddRange(gameQuestionList);
             _context.SaveChanges();
+            //podrugomu
             var userCount = _context.GameUsers.Count(x => x.GameId == _game.Id);
             var gameUsers = _context.GameUsers.Where(x => x.GameId == _game.Id).ToList();
+            var startList = new List<Notification>();
+            foreach (var user in gameUsers)
+            {
+                startList.Add(new Notification
+                {
+                    Text = " ",
+                    TypeId = 2,
+                    UserId = user.UserId,
+                    ProviderId = user.ProviderId,
+                });
+            }
+
+            _context.Notifications.AddRange(startList);
             foreach (var question in questions)
             {
                 var gameQuestion = _context.GameQuestions
@@ -80,17 +103,36 @@ namespace IntelligenceBattle.Services.GameManager.GameController
                     }
 
                 }
+                if (DateTime.Now > endTime)
+                {
+                    var timeoutList = new List<Notification>();
+                    foreach (var user in gameUsers)
+                    {
+
+                        timeoutList.Add(new Notification
+                        {
+                            Text = " ",
+                            TypeId = 4,
+                            UserId = user.UserId,
+                            ProviderId = user.ProviderId,
+                        });
+                    }
+                    _context.Notifications.AddRange(timeoutList);
+                }
                 gameQuestion.IsCurrent = false;
                 _context.SaveChanges();
             }
+            
 
             var endGameNotList = new List<Notification>();
             foreach (var user in gameUsers)
             {
                 endGameNotList.Add(new Notification
                 {
-                    Text = "game was end",
-                    TypeId = 1,
+                    Text = " ",
+                    TypeId = 3,
+                    UserId = user.UserId,
+                    ProviderId = user.ProviderId,
                 });
             }
 

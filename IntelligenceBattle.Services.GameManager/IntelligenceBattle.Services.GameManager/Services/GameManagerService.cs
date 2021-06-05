@@ -49,6 +49,8 @@ namespace IntelligenceBattle.Services.GameManager.Services
 
                 foreach (var s in b)
                 {
+                    _context.SearchGames.RemoveRange(s.Data);
+                    await _context.SaveChangesAsync();
                     var newGame = new Game
                     {
                         CategoryId = s.Data.First().CategoryId,
@@ -56,10 +58,6 @@ namespace IntelligenceBattle.Services.GameManager.Services
                         CreatedDatetime = DateTime.Now,
                         IsEnd = false,
                     };
-                    
-                    await _context.Games.AddAsync(newGame);
-                    await _context.SaveChangesAsync();
-                    await _context.Entry(newGame).ReloadAsync();
                     foreach (var search in s.Data)
                     {
                         newGame.GameUsers.Add(new GameUser
@@ -67,10 +65,9 @@ namespace IntelligenceBattle.Services.GameManager.Services
                             CreatedDateTime = DateTime.Now,
                             ProviderId = search.ProviderId,
                             UserId = search.UserId,
-                            GameId = newGame.Id,
                         });
-                        _context.SearchGames.Remove(search);
                     }
+                    await _context.Games.AddAsync(newGame);
                     await _context.SaveChangesAsync();
                     var gameController =
                         ActivatorUtilities.CreateInstance<GameController.GameController>(_iServiceProvider, newGame);
