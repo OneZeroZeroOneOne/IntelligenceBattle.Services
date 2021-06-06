@@ -270,11 +270,23 @@ namespace IntelligenceBattle.Services.GameManager.Models
 
                 entity.Property(e => e.Text).IsRequired();
 
+                entity.HasOne(d => d.Provider)
+                    .WithMany(p => p.Notifications)
+                    .HasForeignKey(d => d.ProviderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Notification_ProviderId_fkey");
+
                 entity.HasOne(d => d.Type)
                     .WithMany(p => p.Notifications)
                     .HasForeignKey(d => d.TypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Notification_TypeId_fkey");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Notifications)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Notification_UserId_fkey");
             });
 
             modelBuilder.Entity<NotificationType>(entity =>

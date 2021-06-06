@@ -10,6 +10,7 @@ namespace IntelligenceBattle.Services.GameManager.Models
         public User()
         {
             GameUsers = new HashSet<GameUser>();
+            Notifications = new HashSet<Notification>();
             SearchGames = new HashSet<SearchGame>();
             SendQuestions = new HashSet<SendQuestion>();
             UserAnswers = new HashSet<UserAnswer>();
@@ -24,6 +25,7 @@ namespace IntelligenceBattle.Services.GameManager.Models
 
         public virtual Lang Lang { get; set; }
         public virtual ICollection<GameUser> GameUsers { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<SearchGame> SearchGames { get; set; }
         public virtual ICollection<SendQuestion> SendQuestions { get; set; }
         public virtual ICollection<UserAnswer> UserAnswers { get; set; }

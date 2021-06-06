@@ -13,6 +13,8 @@ namespace IntelligenceBattle.Services.GameManager.Models
         public int ProviderId { get; set; }
         public int UserId { get; set; }
 
+        public virtual AuthorizationProvider Provider { get; set; }
         public virtual NotificationType Type { get; set; }
+        public virtual User User { get; set; }
     }
 }
