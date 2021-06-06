@@ -39,7 +39,7 @@ namespace IntelligenceBattle.Services.GameManager.GameController
             var questionsCount = questionsCountQuery.Count();
             var questions = questionsQuery
                 .OrderBy(x => x.Id)
-                .Skip(random.Next(1, questionsCount - gameQuestionCount))
+                .Skip(random.Next(0, questionsCount - gameQuestionCount))
                 .Take(gameQuestionCount)
                 .ToList();
             var gameQuestionList = new List<GameQuestion>();
