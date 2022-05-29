@@ -25,7 +25,6 @@ namespace IntelligenceBattle.Services.GameManager.Services
 
         public async Task CreateGames()
         {
-            var searche1s = await _context.SearchGames.ToListAsync();
             var searches = (await _context.SearchGames
                 .Include(x => x.GameType)
                 .ToListAsync()).AsEnumerable().GroupBy(x => new

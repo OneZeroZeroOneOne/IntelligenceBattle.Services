@@ -24,7 +24,6 @@ namespace IntelligenceBattle.Services.GameManager
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 try
                 {
                     await _gameManagerService.CreateGames();
